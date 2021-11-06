@@ -6,12 +6,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<title>Login</title>
+	<title>Bienvenido</title>
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
 	<link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="imgs/icon.png">
 </head>
 <body>
-    <section id="mensaje"></section>
+    <br>
+    <section id="mensaje" style="font-weight: bold;"></section>
 	<div class="container" id="container">
 		<div class="form-container sign-up-container">
 			<form autocomplete="off">
@@ -24,17 +26,17 @@
 				<input type="email" placeholder="Correo Electronico" name="correo" id="correo" required/>
 				<input type="password" placeholder="Contraseña" name="pwd" id="pwd" required/>
 				<br>
-				<a class="btn btn-info" onclick="enviarDatos()">Registrar</a>
+				<a class="btn btn-info" onclick="enviarDatos()"><b>Registrar</b></a>
 			</form>
 		</div>
 		<div class="form-container sign-in-container">
-			<form action="login.php" method="post" autocomplete="off">
+			<form autocomplete="off">
 				<h1>Iniciar Sesion</h1>
 				<br>
-				<input type="email" placeholder="Correo" name="correo" id="correo" required/>
-				<input type="password" placeholder="Contraseña"	name="pass" id="pass" required/>
+				<input type="email" placeholder="Correo" name="correo" id="correoLogin" required/>
+				<input type="password" placeholder="Contraseña"	name="pass" id="pwdLogin" required/>
 				<br>
-				<button>Entrar</button>
+				<a class="btn btn-info" onclick="entrar()"><b>Entrar</b></a>
 			</form>
 		</div>
 		<div class="overlay-container">

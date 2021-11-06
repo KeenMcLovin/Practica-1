@@ -18,18 +18,18 @@ function soloLetras(e){
  
 	tecla_especial = false
 	for(var i in especiales){
-		 if(key == especiales[i]){
+		if(key == especiales[i]){
 			 tecla_especial = true;
 			 break;
-		 }
-	 }
+		}
+	}
  
-	 if(letras.indexOf(tecla)==-1 && !tecla_especial){
+	if(letras.indexOf(tecla)==-1 && !tecla_especial){
 		 return false;
-	 }
- }
+	}
+}
  
- function soloNumeros(e){
+function soloNumeros(e){
 	key = e.keyCode || e.which;
 	tecla = String.fromCharCode(key).toLowerCase();
 	letras = "0123456789";
@@ -37,18 +37,18 @@ function soloLetras(e){
  
 	tecla_especial = false
 	for(var i in especiales){
-		 if(key == especiales[i]){
+		if(key == especiales[i]){
 			 tecla_especial = true;
 			 break;
-		 }
-	 }
+		}
+	}
  
-	 if(letras.indexOf(tecla)==-1 && !tecla_especial){
+	if(letras.indexOf(tecla)==-1 && !tecla_especial){
 		 return false;
-	 }
- }
+	}
+}
  
- function soloNumerosp(e){
+function soloNumerosp(e){
 	key = e.keyCode || e.which;
 	tecla = String.fromCharCode(key).toLowerCase();
 	letras = "0123456789.";
@@ -56,23 +56,18 @@ function soloLetras(e){
  
 	tecla_especial = false
 	for(var i in especiales){
-		 if(key == especiales[i]){
+		if(key == especiales[i]){
 			 tecla_especial = true;
 			 break;
-		 }
-	 }
+		}
+	}
  
-	 if(letras.indexOf(tecla)==-1 && !tecla_especial){
+	if(letras.indexOf(tecla)==-1 && !tecla_especial){
 		 return false;
-	 }
- }
- 
- function myFunction() {
-   document.getElementById("myForm").reset();
- }
- 
-  // Write on keyup event of keyword input element
- $(document).ready(function(){
+	}
+}
+
+$(document).ready(function(){
 	 $("#search").keyup(function(){
 		 _this = this;
 		 // Show only matching TR, hide rest of them
@@ -83,11 +78,9 @@ function soloLetras(e){
 				 $(this).show();
 		 });
 	 });
- });
+});
  
- function enviarDatos(){
-	console.log("Dentro");
-
+function enviarDatos(){
 	var nombre 		= $('#nombre').val();
 	var apaterno 	= $('#apaterno').val();
 	var amaterno 	= $('#amaterno').val();
@@ -95,17 +88,47 @@ function soloLetras(e){
 	var correo 		= $('#correo').val();
 	var pwd 		= $('#pwd').val();
 
-	console.log('nombre='+nombre+'&apaterno='+apaterno+'&amaterno='+amaterno+'&telefono='+telefono+'&correo='+correo+'&pwd='+pwd);
+	if (nombre == '' || apaterno == '' || amaterno == '' || telefono == '' || correo == '' || pwd == '') {
+		data = '<div class="alert alert-warning">Se deben llenar todos los campos antes</div>';
+		$("#mensaje").html(data);
+	}else{
+		var envio = 'nombre='+nombre+'&apaterno='+apaterno+'&amaterno='+amaterno+'&telefono='+telefono+'&correo='+correo+'&pwd='+pwd;
+
+		$.ajax({
+			type: "POST",
+			url: "./php/registro.php",
+			data: envio,
+			success:function(data){
+				$("#mensaje").html(data);
+			},
+			error:function (){
+				$("#error").text("Error fatal");
+			}
+		});
+	}
+}
+
+function entrar(){
+	var correo 		= $('#correoLogin').val();
+	var pwd 		= $('#pwdLogin').val();
+	
+	var envio = 'correo='+correo+'&pwd='+pwd;
 
 	$.ajax({
 		type: "POST",
-		url: "./php/registro.php",
-		data: 'nombre='+nombre+'&apaterno='+apaterno+'&amaterno='+amaterno+'&telefono='+telefono+'&correo='+correo+'&pwd='+pwd,
+		url: "./php/login.php",
+		data: envio,
 		success:function(data){
-			$("#mensaje").html(data);
+			if (data == 'true') {
+				var html = '<div class="alert alert-succes">Bienvenid@</div>';
+				$("#mensaje").html(html);
+				window.location.assign('inicio.php');
+			}else{
+				var html = '<div class="alert alert-warning">Usuario no encontrado</div>';
+				$("#mensaje").html(html);
+			}
 		},
 		error:function (){
-			$("#error").text("Error fatal");
 		}
 	});
 }
