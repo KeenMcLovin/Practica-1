@@ -85,3 +85,27 @@ function soloLetras(e){
 	 });
  });
  
+ function enviarDatos(){
+	console.log("Dentro");
+
+	var nombre 		= $('#nombre').val();
+	var apaterno 	= $('#apaterno').val();
+	var amaterno 	= $('#amaterno').val();
+	var telefono 	= $('#telefono').val();
+	var correo 		= $('#correo').val();
+	var pwd 		= $('#pwd').val();
+
+	console.log('nombre='+nombre+'&apaterno='+apaterno+'&amaterno='+amaterno+'&telefono='+telefono+'&correo='+correo+'&pwd='+pwd);
+
+	$.ajax({
+		type: "POST",
+		url: "./php/registro.php",
+		data: 'nombre='+nombre+'&apaterno='+apaterno+'&amaterno='+amaterno+'&telefono='+telefono+'&correo='+correo+'&pwd='+pwd,
+		success:function(data){
+			$("#mensaje").html(data);
+		},
+		error:function (){
+			$("#error").text("Error fatal");
+		}
+	});
+}
